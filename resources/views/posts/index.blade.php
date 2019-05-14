@@ -7,6 +7,7 @@
   </div>
   <div class="card card-default">
     <div class="card-header">Posts</div>
+    
     <div class="card-body">
       @if($posts->count() > 0)
         <table class="table">
@@ -23,7 +24,15 @@
                   {{-- <td><img src="‌{{ asset($post->image) }}" /><td> --}}
                   <td>{{ $post->title }}</td>
                   <td>{{ $post->description }}</td>
-                  @if(!$post->trashed())
+                  @if($post->trashed())
+                    <td>
+                      <form action="{{ route('restore-posts', $post->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-primary btn-sm">Restore</button>
+                      </form>
+                    <td>
+                  @else
                     <td><a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-sm">Edit</a></td>
                   @endif
                   <td>
