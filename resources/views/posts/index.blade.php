@@ -19,12 +19,12 @@
             <tbody>
               @foreach($posts as $post)
                 <tr>
-                  <td>{{ $post->id }}</td>
-                  {{-- <td><img src="{‌{ asset('/storage/'.$post->image) }}" /><td> --}}
+                  <td>{{ $post->id }}</td>                  
+                  {{-- <td><img src="‌{{ asset($post->image) }}" /><td> --}}
                   <td>{{ $post->title }}</td>
                   <td>{{ $post->description }}</td>
                   @if(!$post->trashed())
-                    <td><a href="#" class="btn btn-primary btn-sm">Edit</a></td>
+                    <td><a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-sm">Edit</a></td>
                   @endif
                   <td>
                     <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
